@@ -1,9 +1,35 @@
-import os
+"""
+Electricity Consumption Web Application
+
+"""
+
+import asyncio
+import json
+import logging
+import sys
+
+import click
 
 from app.infrastructure import http
 
 
-def main(host="127.0.0.1", port=8080):
+@click.command()
+@click.option(
+    "-c",
+    "--config",
+    type=click.File("r"),
+    default="./config.json",
+    help="Configuration file",
+)
+def main(config):
+    """entry point to run the application"""
 
-    # Initialize the HTTP server.
-    http.run(os.getenv("SERVER_HOST", host), os.getenv("SERVER_PORT", port))
+    config = json.load(config)
+    logging.basicConfig(
+        stream=sys.stdout,
+        level=config["logging_level"],
+        format="%(asctime)s - %(name)s - %(levelname)s - %(message)s",
+    )
+    logging.log(logging.INFO, "Starting application")
+    loop = asyncio.get_event_loop()
+    http.run(loop, config)

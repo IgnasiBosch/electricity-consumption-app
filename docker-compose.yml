@@ -1,0 +1,21 @@
+version: "2.1"
+
+services:
+
+    app:
+        image: econsumption:latest
+        build: .
+        ports:
+            - "8080:8080"
+    ci:
+        container_name: econsumption-ci
+        image: econsumption:latest
+        build: .
+        ports:
+            - "8080:8080"
+        entrypoint: /app/files/run_tests.sh
+        volumes:
+            # not mapping directly onto htmlcov or else you might get permission
+            # issues when it runs as root in the container
+            - ./cihtmlcov:/app/htmlcov
+            - ./coverage.xml:/app/coverage.xml

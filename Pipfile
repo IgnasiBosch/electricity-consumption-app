@@ -3,8 +3,18 @@ name = "pypi"
 url = "https://pypi.org/simple"
 verify_ssl = true
 
-[dev-packages]
+[packages]
+aiohttp = "==3.6"
+aiohttp_cors = "*"
+click = "*"
+python-geoip-geolite2 = "*"
+python-geoip-python3 = "*"
+
+asynctest = "*"
+invoke = "*"
 pytest = "*"
+pytest-asyncio = "*"
+pytest-mock = "*"
 pytest-cov = "*"
 mypy = "*"
 pylint = "*"
@@ -12,10 +22,6 @@ black = "==19.3b0"
 coverage = "*"
 "flake8" = "*"
 
-[packages]
-aiohttp = "==3.6"
-aiohttp_cors = "*"
-click = "*"
 
 [requires]
 python_version = "3.7"

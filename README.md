@@ -1,6 +1,16 @@
 # Electricity Consumption Web Application
 
 ## Instructions
+
+### In Docker
+You need to have docker-compose installed in order to proceed  
+
+Run:  
+`$ make build && make run`  
+
+
+### Locally
+
 Install dependencies:  
 `$ make install`  
 
@@ -8,10 +18,12 @@ Run the application:
 `$ make run`
 
 
+Check make options for testing, CI, etc
+
 
 #### Summary
 
-This task is designet to be fun ( i hope ), educational and help ussess few areas of engineeting. I do understand that people are busy and that's why I will leave it to you how much you want to work on it before you will send task. I am also open for alterations if you will find something that you would like to play around - but in this case please come back to me and ask. 
+This task is designed to be fun ( i hope ), educational and help ussess few areas of engineering. I do understand that people are busy and that's why I will leave it to you how much you want to work on it before you will send task. I am also open for alterations if you will find something that you would like to play around - but in this case please come back to me and ask. 
 
 Any feedback is welcome. 
 

@@ -1,0 +1,8 @@
+{
+  "host": "0.0.0.0",
+  "port": 8080,
+  "source_url": "https://api.worldbank.org",
+  "data_refresh_interval_in_days": 30,
+  "logging_level": "DEBUG",
+  "openapi_filepath": "./files/openapi.json"
+}

@@ -1,0 +1,170 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "2.0.0",
+    "title": "Electricity Consumption Web Application",
+    "license": {
+      "name": "MIT"
+    },
+    "contact": {
+      "email": "me@ignasibosch.com"
+    }
+  },
+  "servers": [
+    {
+      "url": "http://localhost:8080/v1",
+      "description": "API Version 1.0.0"
+    }
+  ],
+  "tags": [
+    {
+      "name": "Reports",
+      "description": "Report operations"
+    }
+  ],
+  "paths": {
+    "/energy-consumption": {
+      "get": {
+        "summary": "Retrieve top 10 of energy consumption per capita",
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string",
+              "example": "Austria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DataResultResponse"
+          }
+        }
+      }
+    },
+    "/electricity-access": {
+      "get": {
+        "summary": "Retrieve top 10 and bottom 10 of electricity access ranking",
+        "parameters": [
+          {
+            "required": false,
+            "in": "query",
+            "name": "country",
+            "schema": {
+              "type": "string",
+              "example": "Austria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DataResultResponse"
+          }
+        }
+      }
+    },
+    "/country/{country_name}": {
+      "get": {
+        "summary": "Retrieve metrics from a given country",
+        "parameters": [
+          {
+            "required": true,
+            "in": "path",
+            "name": "country_name",
+            "schema": {
+              "type": "string",
+              "example": "Austria"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DataResultsResponse"
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "DataResultItem": {
+        "type": "object",
+        "properties": {
+          "label": {
+            "type": "string",
+            "example": "Austria",
+            "description": "Label of the value"
+          },
+          "value": {
+            "description": "Value",
+            "oneOf": [
+              {
+                "type": "string",
+                "example": "Austria",
+                "description": "Value"
+              },
+              {
+                "type": "number",
+                "format": "-",
+                "example": 0.0123,
+                "description": "Value"
+              }
+            ]
+
+          }
+        }
+      },
+      "DataResult": {
+        "type": "object",
+        "properties": {
+          "indicator": {
+            "type": "string",
+            "example": "Total Energy Consumption per capita",
+            "description": "Indicator label"
+          },
+          "year": {
+            "type": "integer",
+            "example": 2018,
+            "description": "Year where the data belongs"
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/DataResultItem"
+            }
+          }
+        }
+      },
+      "DataResults": {
+        "type": "array",
+        "items": {
+          "$ref": "#/components/schemas/DataResult"
+        }
+      }
+    },
+    "responses": {
+      "DataResultResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DataResult"
+            }
+          }
+        }
+      },
+      "DataResultsResponse": {
+        "description": "",
+        "content": {
+          "application/json": {
+            "schema": {
+              "$ref": "#/components/schemas/DataResults"
+            }
+          }
+        }
+      }
+    }
+  }
+}

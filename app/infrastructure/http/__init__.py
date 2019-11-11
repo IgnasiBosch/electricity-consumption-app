@@ -1,1 +1,1 @@
-from .server import run
+from app.infrastructure.http.server import run
